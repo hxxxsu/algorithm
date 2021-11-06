@@ -15,9 +15,13 @@ for (let i = 0; i <= input; i++) {
 console.log(arr[arr.length - 1]);
 
 ///////////////////
-const fibo = n => {
-  let test = n <= 1 ? n : fibo(n - 1) + fibo(n - 2);
-  console.log(n, 'test', test);
-  return test;
-};
+// const fibo = n => {
+//   let test = n <= 1 ? n : fibo(n - 1) + fibo(n - 2);
+//   console.log(n, 'test', test);
+//   return test;
+// };
+// console.log(fibo(input));
+
+///////////////////
+const fibo = n => (n <= 1 ? n : fibo(n - 1) + fibo(n - 2));
 console.log(fibo(input));
