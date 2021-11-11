@@ -1,4 +1,5 @@
-let input = 3;
+// https://www.acmicpc.net/problem/11729
+let input = 4;
 
 let N = Number(input); // 원판의 갯수
 let count = 0;
