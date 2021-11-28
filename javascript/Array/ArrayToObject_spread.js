@@ -3,4 +3,4 @@ let names = ['June', 'Han', 'Logan'];
 let nameObj = { ...names };
 
 console.log(nameObj);
-// => {0: 'June', 1: 'Han', 2: 'Logan'}
+// => {'0': 'June', '1': 'Han', '2': 'Logan'}
