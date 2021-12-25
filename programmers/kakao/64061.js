@@ -1,16 +1,27 @@
 //https://programmers.co.kr/learn/courses/30/lessons/64061
 function solution(board, moves) {
-  console.log('board', board);
-  console.log('moves', moves);
+  let bd = [...board];
+  let arr = [];
 
   moves
     .map(move => move - 1)
     .forEach(move => {
-      const item = board.find(item => item[move] > 0);
-      console.log('item', item[move]);
+      const idx = bd.findIndex(item => item[move] > 0);
 
-      console.log('move', move);
+      if (idx != -1) {
+        arr.push(board[idx][move]);
+        board[idx][move] = 0;
+      }
     });
+  console.log('board', board);
+  console.log('arr', arr);
+
+  arr.forEach((item, i) => {
+    if (arr.length === i - 1) return;
+    if (item === arr[i + 1]) (arr[i] = 0), (arr[i + 1] = 0);
+  });
+
+  console.log('arr', arr);
 }
 
 solution(
