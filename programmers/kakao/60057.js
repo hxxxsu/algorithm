@@ -1,35 +1,35 @@
 //https://programmers.co.kr/learn/courses/30/lessons/60057
 function solution(s) {
-  let arr = [];
-  let step = 1;
-  for (let i = 0; i < s.length; i++) {
-    if (i > step) {
-      arr.push(s[i]);
-    } else {
-      if (s[i] === arr[i + step]) {
-        arr[i];
-      }
-    }
-  }
+  let str = s.split('');
+  let answer = s.length;
 
-  // for (let step = 1, len = s.length; step <= len; step++) {
-  //   answer = s.split('');
-  //   console.log('step', step);
-  //   let box = [];
-  //   answer.forEach((item, i) => {
-  //     box.push(item);
-  //     box.forEach();
-  //   });
-  // }
+  for (let step = 1; step <= str.length; step++) {
+    let finalArr = [];
+    let slicedArr = [];
+    for (let i = 0; i < str.length; i += step) slicedArr.push(str.slice(i, i + step).join(''));
+    for (let i = 0; i < slicedArr.length; i++) {
+      let cnt = 0;
+      while (true) {
+        if (slicedArr[i] === slicedArr[i + (cnt + 1)]) cnt++;
+        else break;
+      }
+      if (cnt > 0) {
+        i += cnt;
+        finalArr.push(`${cnt + 1}${slicedArr[i]}`);
+      } else finalArr.push(slicedArr[i]);
+    }
+    const flen = finalArr.join('').length;
+    if (answer > flen) answer = flen;
+  }
   return answer;
 }
 
 let testCases = [
-  'aabbaccc'
-  // 'ababcdcdababcdcd',
-  // 'abcabcdede',
-  // 'abcabcabcabcdededededede',
-  // 'xababcdcdababcdcd'
+  'aabbaccc',
+  'ababcdcdababcdcd',
+  'abcabcdede',
+  'abcabcabcabcdededededede',
+  'xababcdcdababcdcd'
 ];
 
 testCases.forEach(testCase => {
