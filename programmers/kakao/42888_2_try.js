@@ -1,21 +1,17 @@
-function solution(records) {
-  let arr = []; // 메시지 obj를 담을 배열
-  let users = []; // uid와 lastNick 쌍의 Object Array
-  records.forEach(record => {
-    const [type, uid, nick = null] = record.split(' ');
-    if (nick) {
-      const idx = users.findIndex(item => item.uid === uid);
-      if (idx === -1) users.push({ uid, nick });
-      else users[idx].nick = nick;
-    }
-    if (type === 'Enter' || type === 'Leave') arr.push({ type, uid, nick });
+function solution(recode) {
+  let recodeArr = recode.map(r => r.split(' '));
+  let userArr = {};
+  recodeArr.forEach(r => {
+    if (r[2]) userArr[r[1]] = r[2];
   });
 
-  return arr.map(item => {
-    return `${users.find(user => user.uid === item.uid).nick}님이 ${
-      item.type === 'Enter' ? '들어왔' : '나갔'
-    }습니다.`;
-  });
+  return recodeArr
+    .map(r => {
+      if (r[0] != 'Change')
+        return `${userArr[r[1]]}님이 ${r[0] === 'Enter' ? '들어왔' : '나갔'}습니다.`;
+      else return null;
+    })
+    .filter(item => item);
 }
 
 console.log(
