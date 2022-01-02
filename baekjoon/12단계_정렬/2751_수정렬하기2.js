@@ -1,4 +1,4 @@
-// trim 안붙히면 틀림
+// trim 안붙히면 틀림 2750 문제와 똑같음
 // let input = require('fs').readFileSync(0, 'utf8').trim().split('\n');
 let input = `5
 5
