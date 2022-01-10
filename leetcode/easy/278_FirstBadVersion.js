@@ -4,9 +4,15 @@ const isBadVersion = version => {
 };
 
 var solution = function (n) {
-  for (let i = 1; i <= n; i++) {
-    if (isBadVersion(i)) return i;
+  var start = 1;
+  var end = n;
+  while (start + 1 < end) {
+    var center = parseInt((end - start) / 2 + start);
+    if (isBadVersion(center)) end = center;
+    else start = center;
   }
+  if (isBadVersion(start)) return start;
+  return end;
 };
 
 console.log('result', solution(10000));
