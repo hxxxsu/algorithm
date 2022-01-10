@@ -6,13 +6,11 @@ const isBadVersion = version => {
 var solution = function (n) {
   var start = 1;
   var end = n;
-  while (start + 1 < end) {
+  while (start < end) {
     var center = parseInt((end - start) / 2 + start);
-    if (isBadVersion(center)) end = center;
-    else start = center;
+    isBadVersion(center) ? (end = center) : (start = center + 1);
   }
-  if (isBadVersion(start)) return start;
   return end;
 };
 
-console.log('result', solution(10000));
+console.log('result', solution(625));
