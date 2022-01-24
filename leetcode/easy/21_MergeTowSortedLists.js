@@ -36,7 +36,7 @@ var mergeTwoLists = function (l1, l2) {
     current = current.next;
   }
   current.next = l1 || l2;
-  return temp;
+  return temp.next;
 };
 
 console.log(mergeTwoLists(createL([1, 2, 4]), createL([1, 3, 4])));
