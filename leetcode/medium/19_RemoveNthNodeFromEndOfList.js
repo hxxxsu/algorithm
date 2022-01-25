@@ -22,11 +22,22 @@ function createL(a) {
  * @return {ListNode}
  */
 var removeNthFromEnd = function (head, n) {
-  while (head) {}
+  let temp = new ListNode(0, null);
+  let current = temp;
 
-  console.log('head', head);
-  console.log('n', n);
-  return;
+  current.next = head;
+
+  while (true) {
+    let cNext = current;
+    for (let i = 0; i < n; i++) {
+      cNext = cNext.next;
+    }
+    if (cNext.next === null) {
+      current.next = current.next.next;
+      return temp.next;
+    }
+    current = current.next;
+  }
 };
 
-console.log(removeNthFromEnd(createL([1]), 2));
+console.log('return', removeNthFromEnd(createL([1, 2, 3, 4, 5]), 4));
