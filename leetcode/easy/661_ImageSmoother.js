@@ -1,24 +1,28 @@
+const isValid = (r, c, rows, cols) => r < rows && r >= 0 && c < cols && c >= 0;
 /**
  * @param {number[][]} img
  * @return {number[][]}
  */
 var imageSmoother = function (img) {
+  let rLen = img.length,
+    cLen = img[0].length;
+  let ret = new Array(rLen).fill(0).map(_ => new Array(cLen).fill(0));
+
+  console.log(ret);
+
   img.forEach((row, ri) => {
     row.forEach((col, ci) => {
-      let obj = {
-        tl: img[ri - 1][ci - 1] || 0,
-        t: img[ri - 1][ci] || 0,
-        tr: img[ri - 1][ci + 1] || 0,
-        l: img[ri][ci - 1] || 0,
-        r: img[ri][ci + 1] || 0,
-        bl: img[ri + 1][ci - 1] || 0,
-        b: img[ri + 1][ci] || 0,
-        br: img[ri + 1][ci + 1] || 0
-      };
-
-      console.log(obj);
+      let cnt = 0;
+      for (let x of [-1, 0, 1])
+        for (let y of [-1, 0, 1])
+          if (isValid(ri + x, ci + y, rLen, cLen)) {
+            cnt++;
+            ret[ri][ci] += img[ri + x][ci + y];
+          }
+      ret[ri][ci] = Math.floor(ret[ri][ci] / cnt);
     });
   });
+  return ret;
 };
 
 let test1 = [
@@ -35,4 +39,4 @@ let test2 = [
   [100, 200, 100]
 ];
 
-imageSmoother(test2);
+console.log(imageSmoother(test2));
