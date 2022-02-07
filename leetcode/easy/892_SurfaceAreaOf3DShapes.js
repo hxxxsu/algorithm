@@ -3,59 +3,21 @@
  * @return {number}
  */
 var surfaceArea = function (grid) {
-  let cnt = 0;
-  for (let i = 0, iLen = grid.length; i < iLen; i++) {
-    let iGrid = grid.map(r => r[i]);
-
-    const jMax = Math.max(...grid[i]);
-    const iMax = Math.max(...iGrid);
-    let isOneJMax = true;
-    let isOneIMax = true;
-    let jMaxCnt = 0;
-    let iMaxCnt = 0;
-
-    for (let j = 0; j < grid[i].length; j++) {
-      if (grid[i][j] === jMax) {
-        jMaxCnt++;
-      }
-      if (jMaxCnt > 1) {
-        isOneJMax = false;
-        break;
-      }
-    }
-
-    for (let i = 0; i < iGrid.length; i++) {
-      if (iGrid[i] === iMax) {
-        iMaxCnt++;
-      }
-      if (iMaxCnt > 1) {
-        isOneIMax = false;
-        break;
-      }
-    }
-
-    cnt += jMax * 2;
-    cnt += iMax * 2;
-
-    for (let j = 0, jLen = grid[i].length; j < jLen; j++) {
-      let now = grid[i][j];
-      if (now) cnt += 2;
-      let right = null;
-      let bot = null;
-      if (j < jLen - 1) {
-        right = grid[i][j + 1];
-        if (now > right && (now < jMax || !isOneJMax)) cnt += now - right;
-
-        if (j > 0 && now < right) cnt += right - now;
-      }
-      if (i < iLen - 1) {
-        bot = grid[i + 1][j];
-        if (now > bot && (now < iMax || !isOneIMax)) cnt += now - bot;
-        if (i > 0 && now < bot) cnt += bot - now;
-      }
+  let n = grid.length;
+  let res = 0;
+  for (let i = 0; i < n; i++) {
+    for (let j = 0; j < n; j++) {
+      let current = gird[i][j];
+      // 기둥 단위로 계산하기 위해 기둥 높이에 4를 곱하여 4면과 위 아래 2를 더하여 기둥의 총 면을 구함
+      if (current !== 0) res += current * 4 + 2;
+      // 기둥의 총 면에서 앞 뒤 위 아래로 겹쳐지는 면이 있는 경우 제거함.
+      if (i !== 0) res -= Math.min(current, grid[i - 1][j]);
+      if (j !== 0) res -= Math.min(current, grid[i][j - 1]);
+      if (i !== n - 1) res -= Math.min(current, grid[i + 1][j]);
+      if (j !== n - 1) res -= Math.min(current, grid[i][j + 1]);
     }
   }
-  return cnt;
+  return res;
 };
 
 console.log(
