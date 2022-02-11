@@ -7,14 +7,15 @@
  */
 var allCellsDistOrder = function (rows, cols, rCenter, cCenter) {
   let res = [];
-  let arr = new Array(rows).fill(0).map(_ => new Array(cols).fill(0));
-  for (let x = 0; x < arr.length; x++) {
-    for (let y = 0; y < arr[x].length; y++) {
+  for (let x = 0; x < rows; x++) {
+    for (let y = 0; y < cols; y++) {
       let diff = Math.abs(x - rCenter) + Math.abs(y - cCenter);
       if(!res[diff]) res[diff] = [];
       res[diff].push([x,y])
     }
   }
+
+
   return res.flat();
 };
 
